@@ -1,6 +1,6 @@
 # krivah
 
-FIXME: write description
+Krivah is a workflow basedbusiness management framework.
 
 ## Usage
 
@@ -8,6 +8,6 @@ FIXME: write
 
 ## License
 
-Copyright (C) 2010 FIXME
+Copyright (C) 2011 Vivek Khurana
 
 Distributed under the Eclipse Public License, the same as Clojure.
