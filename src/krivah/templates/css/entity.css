@@ -1,0 +1,14 @@
+.itemcontainer {
+	margin-bottom: 10px;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 5px;
+}
+
+.formitem {
+	float: left;
+	margin-right: 10px;
+}
+
+.clearall {
+	clear: both;
+}

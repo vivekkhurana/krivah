@@ -1,0 +1,121 @@
+<html>
+<head>
+<title>Manage script</title>
+<link rel="stylesheet" href="main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/jquery-ui.css" type="text/css" media="screen" />
+
+<script src="js/jquery.min.js"></script>
+
+<script src="js/jquery-ui.js"></script>
+<script>
+
+$(document).ready(function(){
+	$('#addmore').click(function(){
+		var count = parseInt($('#itemcount').val()) + 1;
+		var str = "<li class=\"ui-state-default\" id=\"checklistitem_"+count+"\"><div class=\"formitem\"><input type=\"text\" id=\"time_"+count+"\" name=\"time_"+count+"\"></div><div class=\"formitem\"><input type=\"text\" id=\"cue_"+count+"\" name=\"cue_"+count+"\"></div><div class=\"formitem\"><textarea name=\"narration_"+count+"\" id=\"narration_"+count+"\"></textarea></div><div class=\"clearall\"></div></li>";
+		$('#sortable').append(str);
+		$('#itemcount').val(count);
+	});
+	$('#sortable').sortable({
+	update: function(){
+		$('#scriptseq').val($('#sortable').sortable("serialize"));
+	}
+
+	});
+	$('#checklist').submit(function(){
+		$('#scriptseq').val($('#sortable').sortable("serialize"));
+	});
+});
+</script>
+<style>
+	#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+	</style>
+
+</head>
+<body>
+<div class="forrmcontainer">
+<form name="checklist" id="checklist" action="/addscript" method="POST" ENCTYPE="multipart/form-data">
+<div class="formitem">
+Script title:
+</div>
+<div class="formitem">
+<input type="text"  name="title" id="title">
+</div>
+<div class="clearall"></div>
+
+<div class="formitem">
+Script software:
+</div>
+<div class="formitem">
+	<select id="software" name="software">
+		<option value="linux">Linux</option>
+		<option value="drupal">Drupal</option>
+		<option value="scilab">Scilab</option>
+	</select>
+</div>
+<div class="clearall"></div>
+
+<div class="formitem">
+Script language:
+</div>
+<div class="formitem">
+        <select id="language" name="language">
+		<option value="english">English</option>
+		<option value="hindi">Hindi</option>
+	</select>
+</div>
+<div class="clearall"></div>
+<div class="formitem">Time:</div>
+
+<div class="formitem">Visual cue:</div>
+<div class="formitem">Narration:</div>
+<div class="clearall"></div>
+<ul id="sortable">
+	<li id="checklistitem_1" class="ui-state-default">
+		<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+		<div class="formitem">
+			<input type="text" id="time_1" name="time_1">
+		</div>
+		<div class="formitem">
+			<input type="text" id="cue_1" name="cue_1">
+		</div>
+		<div class="formitem">
+                        <textarea name="narration_1" id="narration_1"></textarea>
+                </div>
+                <div class="clearall"></div>
+
+	</li>	
+</ul>
+<input type="hidden" name="itemcount" id="itemcount" value="1">
+<input type="hidden" name="scriptseq" id="scriptseq" value="">
+<div>
+<input type="button" name="addmore" id="addmore" value="Add more">
+</div>
+<div  class="formitem">
+	Slide:
+</div>
+<div class="formitem">
+	<input type="file" name="slides_file" id="sildes_file">
+</div>
+<div class="clearall"></div>
+<div class="formitem">
+	Additional files:
+</div>
+<div class="formitem">
+	<input type="file" name="additional_files" id="additional_files">
+</div>
+<div class="clearall"></div>
+<div class="formitem">
+	<select name="status" id="status">
+		<option value="draft">Draft</option>
+		<option value="readyforfreview">Ready for review</option>
+		<option value="reviewcomplete">Review completed</option>
+		<option value="publish">Publish</option>
+	</select>
+<div>
+<input type="submit" name="submit" id="submit" value="Save">
+</div>
+</form>
+</div>
+</body>
+</html>

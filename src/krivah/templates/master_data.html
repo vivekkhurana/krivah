@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>Manage Master data</title>
+<link rel="stylesheet" href="main.css" type="text/css" media="screen" />
+<script src="js/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$('#addmore').click(function(){
+		var count = parseInt($('#itemcount').val()) + 1;
+		var str = "<div class=\"formitem\"><input type=\"text\" name=\"optionname"+count+"\" id=\"optionname"+count+"\"/></div><div class=\"formitem\"><input type=\"text\" name=\"optionvalue"+count+"\" id=\"optionvalue"+count+"\"/></div><div class=\"clearall\"></div>";
+		$('.itemcontainer').append(str);
+		$('#itemcount').val(count);
+
+	});
+	
+});
+</script>
+</head>
+<body>
+<form name="master_form" id="master_form" action="/managemaster" method="POST">
+<div class="formcontainer">
+	<div class="formitem">
+		Label:
+	</div>
+	<div class="formitem">
+		<input type="text" name="entitylabel" id="entitylabel"/>
+	</div>
+	<div class="clearall"></div>	
+	 <div class="formitem">
+                Machine name:
+        </div>
+        <div class="formitem">
+                <input type="text" name="machinename" id="machinename"/>
+        </div>
+        <div class="clearall"></div>
+	<div class="formitem">
+		Option name
+	</div>
+	<div class="formitem">Option value</div>
+	<div class="clearall"></div>
+
+	<div class="itemcontainer">
+	<div class="formitem">
+		<input type="text" name="optionname1" id="optionname1"/>
+	</div>
+	<div class="formitem">
+		<input type="text" name="optionvalue1" id="optionvalue1"/>
+	</div>
+	<div class="clearall"></div>
+	</div>
+	<div class="formitem">
+		<input type="button" name="addmore" id="addmore" value="Add more">
+	</div><div class="clearall"></div>
+	<input type="hidden" name="itemcount" id="itemcount" value="1">
+	<input type="submit" name="submit" id="submit" value="Submit">
+
+
+</div>
+</form>
+</body>
+</html>

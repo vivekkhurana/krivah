@@ -1,0 +1,53 @@
+
+<form id="modelform" name="modelform" action="/entity/new" method="POST">
+<div id="formcontainer">
+	<div class="itemcontainer">
+	<div class="formitem">Entity label:</div>
+	<div class="formitem">
+		<input type="text" name="entity_label" id="entity_label">
+	</div>
+	<div class="clearall"></div>
+	<div class="formitem">Entity machine name:</div>
+	<div class="formitem">
+		<input type="text" name="entity_machinename" id="entity_machinename">
+	</div>
+	<div class="clearall"></div>
+	<div class="formitem">
+		Label:
+	</div>
+	<div class="formitem">
+		<input type="text" name="itemlabel1" id="itemlabel1">
+	</div>
+	<div class="clearall"></div>
+	<div class="formitem">
+                Machine name:
+        </div>
+        <div class="formitem">
+                <input type="text" name="machinename1" id="machinename1">
+        </div>
+        <div class="clearall"></div>
+	<div class="formitem">
+		Type:
+	</div>
+	<div class="formitem">
+		<select class="selectitem" name="formtype1" id="formtype1">
+			<option value="text">Text box</option>
+			<option  value="textarea">Text box, multi line</option>
+			<option value="select">Select drop down</option>
+			<option value="selectmaster">Select box from master data</option>
+		</select>
+	</div>
+	<div class="clearall"></div>
+	<input type="hidden" name="fieldcount" id="fieldcount" value="1"/>
+	
+	</div>
+	</div><!-- end formcontainer -->
+	<div class="buttoncontainer">
+	<div class="formitem"><input type="button" name="addmore" id="addmore" value="Add another field"/></div>
+		<div class="formitem">
+	<input type="submit" name="submit" value="Save"/></div>
+	<div class="clearall"></div>
+	</div>
+
+</form>
+

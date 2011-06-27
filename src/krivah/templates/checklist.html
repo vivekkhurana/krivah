@@ -1,0 +1,91 @@
+<html>
+<head>
+<title>Manage checklist</title>
+<link rel="stylesheet" href="main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/jquery-ui.css" type="text/css" media="screen" />
+
+<script src="js/jquery.min.js"></script>
+
+<script src="js/jquery-ui.js"></script>
+<script>
+
+$(document).ready(function(){
+	$('#addmore').click(function(){
+		var count = parseInt($('#itemcount').val()) + 1;
+		var str = "<li class=\"ui-state-default\" id=\"checklistitem_"+count+"\"><div class=\"formitem\">Question:</div><div class=\"formitem\"><input type=\"text\" id=\"question_"+count+"\" name=\"question_"+count+"\"></div><div class=\"clearall\"></div><div class=\"formitem\">Type:</div><div class=\"formitem\"><select id=\"itemtype_"+count+"\" name=\"itemtype_"+count+"\"><option value=\"rating\">Rating</option><option value=\"yesno\">Yes/No</option></select></div><div class=\"clearall\"></div></li>";
+		$('#sortable').append(str);
+		$('#itemcount').val(count);
+	});
+	$('#sortable').sortable({
+	update: function(){
+		$('#questionseq').val($('#sortable').sortable("serialize"));
+	}
+
+	});
+	$('#checklist').submit(function(){
+		$('#questionseq').val($('#sortable').sortable("serialize"));
+	});
+});
+</script>
+<style>
+	#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+	</style>
+
+</head>
+<body>
+<div class="forrmcontainer">
+<form name="checklist" id="checklist" action="/managechecklist" method="POST">
+<div class="formitem">
+Checklist title:
+</div>
+<div class="formitem">
+<input type="text"  name="title" id="title">
+</div>
+<div class="clearall"></div>
+
+<div class="formitem">
+Machine name:
+</div>
+<div class="formitem">
+	<input type="type" name="machine_name" id="machine_name">
+</div>
+<div class="clearall"></div>
+<ul id="sortable">
+	<li id="checklistitem_1" class="ui-state-default">
+		<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+		<div class="formitem">
+			Question:
+		</div>
+		<div class="formitem">
+			<input type="text" id="question_1" name="question_1">
+		</div>
+		<div class="clearall"></div>
+		<div class="formitem">
+			Type:
+		</div>
+		<div class="formitem">
+			<select id="itemtype_1" name="itemtype_1">
+				<option value="rating">Rating</option>
+				<option value="yesno">Yes/No</option>
+			</select>
+		</div>
+		<div class="clearall"></div>
+		<div class="formitem">
+			Allow not required:
+		</div>
+		<div class="formitem">
+			<input type="checkbox" name="na_1" id="na_1">
+		</div>
+		<div class="clearall"></div>
+	</li>	
+</ul>
+<input type="hidden" name="itemcount" id="itemcount" value="1">
+<input type="hidden" name="questionseq" id="questionseq" value="">
+<input type="button" name="addmore" id="addmore" value="Add more">
+<div>
+<input type="submit" name="submit" id="submit" value="Save">
+</div>
+</form>
+</div>
+</body>
+</html>

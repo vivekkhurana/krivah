@@ -1,0 +1,30 @@
+<html>
+<head>
+<title>Login</title>
+<link rel="stylesheet" href="main.css" type="text/css" media="screen" />
+<script src="jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$.getJSON('http://localhost:8080/req_types', function(data){
+		alert('hi');
+		$.each(data, function(i){
+			var str = '<option value='+data[i].value+'>'+data[i].name+'</option>';
+			$('#reqtype').append(str);
+		});
+	});
+});
+
+
+</script>
+</head>
+<body>
+<div class="logincontainer">
+	<form id="loginform" name="loginfoorm" action="/" method="POST">
+		<div class="formlabel">Type of request:</div>
+		<div class="formitem"><select name="reqtype" id="reqtype"></select></div>
+		<div class="clearall"></div>
+		
+	</form> 
+</div>
+</body>
+</html>
