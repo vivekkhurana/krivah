@@ -13,7 +13,7 @@
 )
 
 (defn select-template []
-	(str "theme/jewel/index.html")
+	(str "theme/zen/index.html")
 )
 
 (html/defsnippet add-all-js (java.io.StringReader. (script-element))
