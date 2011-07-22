@@ -4,48 +4,23 @@
   )
 )
 
-(defn script-element []
-	(str "<script></script>")
-)
-
-(defn style-element []
-	(str "<link></link>")
-)
-
 (defn select-template []
-	(str "theme/zen/index.html")
-)
+	(str "theme/zen/index.html"))
 
-(html/defsnippet add-all-js (java.io.StringReader. (script-element))
-[[:script]]
-[req]
-	[:script] (html/set-attr :src "/js/addfield.js")
-)
+(defn add-all-js [media]
+	(map #(assoc {} :tag (keyword "script") :attrs % :content nil) (:scripts media)))
 
-(html/defsnippet add-all-style (java.io.StringReader. (style-element))
-[[:link]]
-[req]
-	[:link] (html/do->
-				(html/set-attr :href "/css/entity.css")
-				(html/set-attr :rel "stylesheet")
-				(html/set-attr :type "text/css"))
-)
+(defn add-all-style [media]
+	(map #(assoc {} :tag (keyword "link") :attrs % :content nil) (:style media)))
 
-(defn theme-response [req content]
+(defn theme-response [req content & media]
 
-(def cur-template (select-template))
-(println cur-template)
-(html/deftemplate response-from-template cur-template []
+	(def cur-template (select-template))
+
+	(html/deftemplate response-from-template cur-template []
 	[(html/attr= :id "welcome")] (html/content content)
 	[:head] (html/do->
-			(html/append (add-all-js req))
-			(html/append (add-all-style req)))
-)
+			(html/append (add-all-js (first media)))
+			(html/append (add-all-style (first media)))))
 
-(apply str (response-from-template))
-
-)
-
-
-;(html/deftemplate ct "theme/jewel/index.html" []
-;	[(html/id= "welcome")] (html/content (abc)))
+	(apply str (response-from-template)))

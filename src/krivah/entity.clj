@@ -22,26 +22,30 @@
 
 (defmethod extract-field-value :default [req index] (println "nothing"))
 
+(defn entity-fields-to-form [fields]
+	(apply merge (map #(assoc {} (keyword (get % :machinename)) 
+		(assoc {} :label (get % :label) :id (get % :machinename) :type (get % :type ))) fields)))
+
+(defn store-entity [form-value]
+)
+
 (defn create [request params]
+(def media {:scripts (list {:src "/js/jquery.min.js"} {:src "/js/addfield.js"}) :style (list {:href "/css/entity.css"})})
+
 	(if (identical? (:request-method request) (keyword "post"))
 	(do
 		(def field-count (Integer/parseInt (get (:form-params request) "fieldcount")))
 		(def fields (loop [f [] i 1 ]
 		(if-not (> i field-count)
-			(recur (assoc f (count fields) (extract-field-value (:form-params request) i)) (inc i))
+			(recur (assoc f (count f) (extract-field-value (:form-params request) i)) (inc i))
 			f)))
 		(db/add-item "entities" {:label (get (:form-params request) "entity_label") :machinename (get (:form-params request) "entity_machinename") :fields fields})
-		(def r (response/create-response))
-			(response/set-body r (theme/theme-response request "Entity created successfully."))
-		)
-		(do
-			(def r (response/create-response))
-			(response/set-body r (theme/theme-response request (fe/html-from-file "krivah/templates/entity.html")))
-		)))
+			(response/http-response :body (theme/theme-response request "Entity created successfully.")))
+			(response/http-response :body (theme/theme-response request (fe/html-from-file "krivah/templates/entity.html") media))))
 
-(defn new-entity-instance [request params]
+	
+(defn new-instance [request params]
 
-(println "params received " params)
-(def r (response/create-response))
-(response/set-body r (theme/theme-response request (fe/html-from-file "krivah/templates/entity.html")))
+	(def form (entity-fields-to-form (:fields (first (db/fetch-one-where "entities" {:machinename  (first params)})))))
+	(fe/manage-form form store-entity)
 )

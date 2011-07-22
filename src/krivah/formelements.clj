@@ -66,19 +66,6 @@
         )
 )
 
-;(html/at rr
-;	[(html/id= "one")] #(html/at % [:option] (fn [node]
-;	(if (= (:value (:attrs node)) cc)
-;		((html/set-attr :selected "selected") node)
-;		node)))
-
-;(defn abc [node]
-;  (if (= (get-in node [:attrs :value]) "c")
-;    ((set-attr :selected "selected") node)
-;    node))
-
-;(html/at rr [(html/id= "one")] #(html/at % [:option]  abc))
-
 (defn as-str
   ([] "")
   ([x] (if (instance? clojure.lang.Named x)
@@ -254,13 +241,12 @@
 	(list (assoc form-node :content (concat (form-error-node form) form-elements (:content form-node)))))
 
 (defn manage-form [form f]
-	(def r (response/create-response))
 
  (if (identical? (:request-method (request/cur-request)) (keyword "post"))
  		(let [vform (validate-form form (:form-params (request/cur-request)))]
  			(if (nil? vform)
  				(f (:form-params (request/cur-request)))
- 				(response/set-body r (theme/theme-response (request/cur-request) (create-form (merge-form-with-values (assoc form :errors vform) (:form-params (request/cur-request))))))))
- 		(response/set-body r (theme/theme-response (request/cur-request) (create-form form)))))
+ 				(response/http-response :body (theme/theme-response (request/cur-request) (create-form (merge-form-with-values (assoc form :errors vform) (:form-params (request/cur-request))))))))
+ 		(response/http-response :body (theme/theme-response (request/cur-request) (create-form form)))))
 
 

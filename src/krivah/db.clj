@@ -20,3 +20,7 @@
 (defn list-all [col key-vec]
 	(congo/fetch (keyword col) :only key-vec)
 )
+
+(defn fetch-one-where [col qmap]
+	(congo/fetch (keyword col) :where qmap)
+)

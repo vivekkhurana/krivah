@@ -5,7 +5,7 @@
 )
 
 (defn store-user [form-value]
-	(println "forms " form))
+	(println "forms " form-value))
 
 (defn register [request params]
 
