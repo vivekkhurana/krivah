@@ -34,3 +34,6 @@
 		(create-damg m)
 	)
 )
+
+(defn insert-menu-item [item]
+	(db/add-item "menu" item))
