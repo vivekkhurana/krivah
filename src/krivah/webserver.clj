@@ -6,7 +6,7 @@
   [krivah.httpkernel :as kernel]
   [krivah.response :as response]
   [krivah.request :as request]
-  [krivah.applications.accounts.accounts :as ac]
+  [krivah.applications.accounts.core :as ac]
   [ring.middleware.file :as wf]
   [clojure.stacktrace :as st]
   [ring.middleware.file-info])
@@ -22,6 +22,7 @@
 
 (cache/create-cache "menu" (menu/init-menu) )
 (ac/load-module)
+(ac/load-menu)
 
 (defn create-response [response]
 	{:status  200

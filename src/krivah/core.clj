@@ -22,5 +22,8 @@
 		)))
 
 (defmacro defmenu [& body]
+	
 	`(defn ~'load-menu []
-		(menu/add-menu-item ~body)))
+		(doseq [x# ~@body]
+			(println x#))
+		))
