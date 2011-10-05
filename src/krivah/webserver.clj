@@ -6,7 +6,7 @@
   [krivah.httpkernel :as kernel]
   [krivah.response :as response]
   [krivah.request :as request]
-  [krivah.applications.accounts.core :as ac]
+  [krivah.applications.accounts.accounts :as ac]
   [ring.middleware.file :as wf]
   [clojure.stacktrace :as st]
   [ring.middleware.file-info])

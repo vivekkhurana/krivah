@@ -27,3 +27,10 @@
 		(doseq [x# ~@body]
 			(println x#))
 		))
+
+(defmacro deffields [& body]
+	`(defn ~'load-fields[]
+		(println ~@body)))
+			
+
+)
